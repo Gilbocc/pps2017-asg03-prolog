@@ -1,11 +1,8 @@
-% search(Elem,List)
-search(X,[X|_]).
-search(X,[_|Xs]):-search(X,Xs).
+% all_bigger(List1,List2)
+% all elements in List1 are bigger than those in List2, 1 by 1
+% example: all_bigger([10,20,30,40],[9,19,29,39]).
 
-% sublist(List1,List2)
-% List1 should be a subset of List2
-% example: sublist([1,2],[5,3,2,1]).
-sublist([], [_]).
-sublist([X|Xs], Y):-
-    search(X, Y),
-    sublist(Xs, Y).
+all_bigger([X], [Y]):- X > Y.
+all_bigger([X|Xs], [Y|Ys]):- 
+    X > Y,
+    all_bigger(Xs, Ys).

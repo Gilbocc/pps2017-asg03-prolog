@@ -1,12 +1,9 @@
-% max(List,Max)
-% Max is the biggest element in List
-% Suppose the list has at least one element
+% average(List,Average)
+% it uses average(List,Count,Sum,Average)
 
-max([H|T],A) :- max(T,A,H).
-max([],M,TM) :- M is TM.
-max([X|Xs],M,TM) :-
-    X >= TM,
-    max(Xs, M, X).
-max([X|Xs],M,TM) :-
-    X < TM,
-    max(Xs, M, TM).
+average(List,A) :- average(List,0,0,A).
+average([],C,S,A) :- A is S/C.
+average([X|Xs],C,S,A) :-
+C2 is C+1,
+S2 is S+X,
+average(Xs,C2,S2,A).

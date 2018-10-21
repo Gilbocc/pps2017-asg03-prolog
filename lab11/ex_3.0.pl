@@ -49,4 +49,19 @@ checkEven(_, NT):- not(member(cell(_,_,void), NT)).
 
 % next([cell(0,0,void),cell(0,1,void),cell(0,2,void),cell(1,0,void),cell(1,1,void),cell(1,2,void),cell(2,0,void),cell(2,1,void),cell(2,2,void)], x, R, NT).
 
-% game(T, P, R, TL)
+game(T, P, R, TL):- game(T, P, R, nothing, TL, [T]).
+game(_, _, R, RR, TL, TLL):-
+    RR \= nothing,
+    R = RR,
+    TL = TLL.
+game(T, P, R, _, TL, TLL):-
+    P == x,
+    next(T, P, R1, TT), 
+    append(TLL, [TT], RES),
+    game(TT, o, R, R1, TL, RES).
+game(T, P, R, _, TL, TLL):-
+    next(T, P, R1, TT), 
+    append(TLL, [TT], RES),
+    game(TT, x, R, R1, TL, RES).
+
+% game([cell(0,0,void),cell(0,0,void),cell(0,0,void),cell(0,0,void),cell(0,0,void),cell(0,0,void),cell(0,0,void),cell(0,0,void),cell(0,0,void)], x, win(x), NT).

@@ -56,12 +56,14 @@ game(_, _, R, RR, TL, TLL):-
     TL = TLL.
 game(T, P, R, _, TL, TLL):-
     P == x,
-    next(T, P, R1, TT), 
-    append(TLL, [TT], RES),
-    game(TT, o, R, R1, TL, RES).
+    findall(res(R1, TT), next(T, P, R1, TT), L),
+    member(res(A, B), L),
+    append(TLL, [B], RES),
+    game(B, o, R, A, TL, RES).
 game(T, P, R, _, TL, TLL):-
-    next(T, P, R1, TT), 
-    append(TLL, [TT], RES),
-    game(TT, x, R, R1, TL, RES).
+    findall(res(R1, TT), next(T, P, R1, TT), L),
+    member(res(A, B), L),
+    append(TLL, [B], RES),
+    game(B, x, R, A, TL, RES).
 
 % game([cell(0,0,void),cell(0,0,void),cell(0,0,void),cell(0,0,void),cell(0,0,void),cell(0,0,void),cell(0,0,void),cell(0,0,void),cell(0,0,void)], x, win(x), NT).
